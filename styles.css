@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+/* utility classes */
+.orgflex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.colflex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.bgset {
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* min css */
+body {
+    overflow: hidden;
+}
+#wallpaper {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/e6b44614-3be2-44bb-af8b-ae8449bf1690/dg4x6da-292bf848-91b9-4d08-90c8-5a81267fb550.jpg');
+    background-size: cover;
+    background-position: 0 -150px;
+    filter: contrast(65%) grayscale(20%) brightness(105%);
+}
+/* taskbar */
+.taskbr {
+    width: 100%;
+    /* color: rgba(19, 255, 224, 0.397) */
+    /* background: linear-gradient(
+        rgb(205, 205, 255) 1%,
+        rgb(88, 88, 255),
+        rgb(107, 107, 255),
+        rgb(98, 98, 255)
+    ); */
+    background: linear-gradient(to bottom, #72A7D0, #3E4095);
+    gap: 20px;
+    justify-content: flex-start;
+    position: fixed;
+    bottom: 0;
+    padding: 2px 0px 2px 2px;
+}
+
+.window {
+    width: 40vw;
+    height: 17rem;
+    background-color: rgb(245, 245, 198);
+    position: absolute;
+    top: 30px;
+    left: 20vw;
+    border: solid 2px blue;
+    border-radius: 6px;
+    /* transition: 0.7s ease-in-out; */
+}
+
+.bluegradfrbr {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: linear-gradient(
+        rgb(89, 68, 255),
+        rgb(61, 61, 255),
+        rgb(86, 86, 255),
+        rgb(87, 87, 255));
+    /* background-color: red; */
+    color: white;
+}
+.smbtn {
+    aspect-ratio: 1;
+    width: 20px;
+    margin: 4px;
+    cursor: pointer;
+    background-size: 20px;
+    border: 0.3px solid rgba(255, 255, 255, 0.546);
+    border-radius: 2px;
+}
+.close {
+    background-color: red;
+}
+/* app ics */
+.appics {
+    aspect-ratio: 1;
+    width: 40px;
+    /* background-color: green; */
+    background-size: 40px;
+}
