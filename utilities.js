@@ -22,3 +22,5 @@ function prependChild(x, y) {
 }
 
 export { el, css, prependChild }
+
+// export default function kundi() { console.log('enthada chandu') }
