@@ -7,6 +7,7 @@ class AppIcs {
         this.appImg = x;
         this.appName = y;
         this.curWindow = false;
+        this.domAS = false
     }
     onHover() {
 
@@ -16,6 +17,7 @@ class AppIcs {
         appEl.classList.add('bgset')
         appEl.style.backgroundImage = `url('${this.appImg}')`
         appEl.style.transition = '0.4s ease-in-out'
+        this.domAS = appEl
         return appEl;
     }
 }

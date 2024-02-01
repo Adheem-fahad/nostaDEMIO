@@ -15,6 +15,8 @@ let taskbar = new TskBr(
     ]
 )
 
-let newMod = new DgradeMod('KUNDI');
+console.log(taskbar)
 
-errorTyFunc.typeOne()
+taskbar.icontray[0].domAS.onclick = () => {
+    errorTyFunc.typeOne()
+}
