@@ -57,6 +57,7 @@ body {
     left: 20vw;
     border: solid 2px blue;
     border-radius: 6px;
+    overflow: hidden;
     /* transition: 0.7s ease-in-out; */
 }
 
@@ -89,4 +90,23 @@ body {
     width: 40px;
     /* background-color: green; */
     background-size: 40px;
+}
+/* error wind */
+.errW {
+    width: 22rem;
+    height: 10rem;
+}
+.warnerrW {
+    background: white;
+    color: black;
+}
+
+/* color-bg */
+.black-bg {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
 }

@@ -1,6 +1,6 @@
 import { el, css, prependChild } from './utilities.js'
 import Window from './window.js';
-import { AppIcs, SrchBr } from './components.js'
+import { AppIcs, SrchBr, objWindows } from './components.js'
 
 let BODY = document.querySelector('body');
 const CLRUT = {
@@ -39,6 +39,9 @@ export default class TskBr {
             y.curWindow = new Window(y.appName, domel)
         } else {
             y.curWindow = new Window(y.appName, domel)
+        }
+        if(y.curWindow) {
+            objWindows.AFtermux(y.curWindow.active)
         }
     }
     DOMobjapps(items) {

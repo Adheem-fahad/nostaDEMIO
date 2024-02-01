@@ -103,16 +103,20 @@ export default class Window {
 }
 
 class ErrWind extends Window {
-    constructor(x, y) {
-        super('Grave error baka', '')
+    constructor(a, x, y) {
+        super(`🚫${a}`, '')
         this.error = x;
         this.options = y;
         this.reduceSTYLE()
     }
     reduceSTYLE() {
+        this.window.classList.add('errW')
+        this.window.children[0].classList.add('warnerrW')
+    }
+    changeOffset(x, y) {
         css(this.window, {
-            width: '22rem', 
-            height: '10rem'                     
+            top: y + 'px',
+            left: x + 'px'
         })
     }
 }
