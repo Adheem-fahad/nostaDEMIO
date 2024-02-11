@@ -24,33 +24,14 @@ export default class TskBr {
         domtsk.classList.add('orgflex')
         this.taskbr = domtsk;
     }
-    onDOMappcl(y, domel) {
-        css(domel, {
-            borderBottom: '3px solid ' + CLRUT.ok,
-            backgroundColor: CLRUT.bgacc
-        })
-        console.log(y.curWindow)
-        if(y.curWindow && y.curWindow.stat == 'min') {
-            css(y.curWindow.window, {
-                left: '40px',
-                top: '60px'
-            })
-        } else if(y.curWindow && y.curWindow.stat == 'close') {
-            y.curWindow = new Window(y.appName, domel)
-        } else {
-            y.curWindow = new Window(y.appName, domel)
-        }
-        if(y.curWindow) {
-            objWindows.AFtermux(y.curWindow.active)
-        }
-    }
+    
     DOMobjapps(items) {
         this.DOMconstr()
 
         items.forEach(x => {
             let appEl = x.DOM(this.taskbr)
             appEl.onclick = () => {
-                this.onDOMappcl(x, appEl)
+                x.onDOMappcl(x, appEl)
             }
         })
     }

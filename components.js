@@ -2,6 +2,12 @@ import { el, css, prependChild } from './utilities.js'
 import Window from './window.js';
 import { ErrWind } from './window.js'
 
+const CLRUT = {
+    ok: '#45f542',
+    denied: '#f54842',
+    bgacc: 'rgba(19, 255, 224, 0.397)'
+}
+
 class AppIcs {
     constructor(x, y) {
         this.appImg = x;
@@ -19,6 +25,30 @@ class AppIcs {
         appEl.style.transition = '0.4s ease-in-out'
         this.domAS = appEl
         return appEl;
+    }
+    onDOMappcl(y, domel) {
+        css(domel, {
+            borderBottom: '3px solid ' + CLRUT.ok,
+            backgroundColor: CLRUT.bgacc
+        })
+        console.log(y.curWindow)
+        if(y.curWindow && y.curWindow.stat == 'min') {
+            css(y.curWindow.window, {
+                left: '40px',
+                top: '60px'
+            })
+        } else if(y.curWindow && y.curWindow.stat == 'close') {
+            y.curWindow = new Window(y.appName, domel)
+        } else {
+            y.curWindow = new Window(y.appName, domel)
+        }
+        if(y.curWindow) {
+            if(y.appName == 'AF termux') {
+                objWindows.AFtermux(y.curWindow.active)
+            } else if(y.appName == 'wisher') {
+                objWindows.Wisher(y.curWindow.active)
+            }
+        }
     }
 }
 class SrchBr {
@@ -49,29 +79,60 @@ class DgradeMod {
 let objWindows = {
     AFtermux: (x) => {
         x.classList.add('black-bg')
-        let textAppear = [
-            'setting up code space',
-            'loading data',
-            'getting gui ready',
-            'loading init files'
-        ]
-        let cnt = 0, snt = 0
-        let timing = setInterval(() => {
-            let itemnow = el('h4', x)
-            // el('br', x)
-            itemnow.textContent = textAppear[cnt]; cnt++ 
-            x.appendChild(itemnow)
-            let dotsgyat = setInterval(() => {
-                itemnow.textContent = itemnow.textContent + '.'
-                snt++
-                if(snt == 4) {
-                    clearInterval(dotsgyat)
+
+
+
+        // first screen
+        const addTextI = async (itemText) => {
+            await randomDelay()
+            let itemnow = el('h4', x);
+            itemText = 'FW C:/User/Termux >>> ' + itemText
+            itemnow.textContent = itemText 
+            // last = itemnow;
+        }
+        const randomDelay = (randomNumber = (1 + Math.floor(Math.random() * 6)) * 1000) => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve()
+                }, randomNumber)
+            })
+        }
+        const mainAF = async () => {
+            let t = setInterval(() => {
+                let last = x.getElementsByTagName('h4')
+                // last = last[last.length - 1]
+
+                for(let i = 0; i < last.length; i++) { 
+                    console.log(last[i].textContent)
+                    if(last[i].textContent.endsWith('...')) {
+                        last[i].textContent = last[i].textContent.slice(0, last[i].textContent.length-3)
+                    } else {
+                        last[i].textContent = last[i].textContent +'.'
+                    }
                 }
-            }, 500)
-            if(cnt == textAppear.length) {
-                clearInterval(timing)
+            }, 300)
+
+            let textAppear = [
+                'setting up code space',
+                'loading data',
+                'getting gui ready',
+                'loading init files'
+            ]
+
+            for (let j in textAppear) {
+                await addTextI(textAppear[j])
             }
-        }, 1300)
+
+            await randomDelay(4500)
+            clearInterval(t)
+            x.innerHTML = ''
+        }
+        mainAF()
+    },
+    Wisher: (x) => {
+        x.classList.add('white-bg')
+
+        let imageLink = 'https://freepngimg.com/save/153883-logo-google-png-free-photo/550x185'
     }
 }
 

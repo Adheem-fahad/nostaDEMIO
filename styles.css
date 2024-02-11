@@ -52,7 +52,7 @@ body {
 .window {
     width: 40vw;
     height: 17rem;
-    background-color: rgb(245, 245, 198);
+    background-color: rgb(255, 255, 255);
     position: absolute;
     top: 30px;
     left: 20vw;
@@ -110,4 +110,9 @@ body {
     color: white;
     display: flex;
     flex-direction: column;
+    font-family: 'courier new';
+}
+
+.white-bg {
+    background-color: white;
 }
