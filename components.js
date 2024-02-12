@@ -101,6 +101,7 @@ let objWindows = {
                     break;
                 case 'Alt':
                     return textCache;
+                case '(': return textCache + keyPressed + ')';break;
                 case 'ArrowUp': return textCache; break; case 'ArrowDown': return textCache; break;case 'ArrowLeft': return textCache; break;case 'ArrowRight': return textCache; break;case 'Control': return textCache; break;case 'CapsLock': return textCache; break;
                 default: 
                     return textCache + keyPressed
@@ -133,6 +134,12 @@ let objWindows = {
             textCache = '';
 
             navels.forEach(z => el('h5', navdiv).textContent = z )
+
+            navdiv.getElementsByTagName('h5')[3].onclick = () => {
+                let newRunTime = new Window('RUNNINGprog')
+                newRunTime.active.classList.add('black-bg')
+                newRunTime.active.textContent = 'Running your af file in a sec'
+            }
 
             afmainedit.style.height = ` ${ x.clientHeight - navdiv.clientHeight }px`
 
@@ -200,7 +207,8 @@ let objWindows = {
             homeAFscreen()
             cursorBlink()
         }
-        mainAF()
+        // mainAF()
+        homeAFscreen()
     },
     Wisher: (x) => {
         x.classList.add('white-bg')
