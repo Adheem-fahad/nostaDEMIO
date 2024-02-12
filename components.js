@@ -79,6 +79,46 @@ class DgradeMod {
 let objWindows = {
     AFtermux: (x) => {
         x.classList.add('black-bg')
+        let isNow = true, interval, afmainedit, textCache;
+
+        const parseKeyboard = (textCache, keyPressed) => {
+            switch(keyPressed) {
+                case 'Backspace':
+                    if(textCache[textCache.length-1] == ';') {
+                        console.log(textCache[textCache.lastIndexOf('&')-1])
+                        return textCache.slice(0, textCache.lastIndexOf('&'))
+                    } else {
+                        return textCache.slice(0, -1)
+                    }
+                    break;
+                case 'Shift':
+                    // state = 0
+                    
+                    return textCache
+                    break;
+                case 'Enter':
+                    return textCache + '</br>'
+                    break;
+                case 'Alt':
+                    return textCache;
+                case 'ArrowUp': return textCache; break; case 'ArrowDown': return textCache; break;case 'ArrowLeft': return textCache; break;case 'ArrowRight': return textCache; break;case 'Control': return textCache; break;case 'CapsLock': return textCache; break;
+                default: 
+                    return textCache + keyPressed
+            }
+        }
+        
+        let cursorBlink = () => {
+            interval = setInterval(() => {
+                if(isNow) {
+                    afmainedit.innerHTML += '|'
+                    isNow = false
+                } else {
+                    isNow = true
+                    afmainedit.innerHTML = textCache
+                }
+            }, 600)
+        }
+
         const homeAFscreen = () => {
             let navels = [
                 'File',
@@ -88,15 +128,29 @@ let objWindows = {
             ]
             
             const navdiv = el('div', x, ['class', 'defflexnav']);
-            const afmainedit = el('div', x, ['class', 'codeditor'])
+            afmainedit = el('div', x, ['class', 'codeditor'])
+
+            textCache = '';
 
             navels.forEach(z => el('h5', navdiv).textContent = z )
 
             afmainedit.style.height = ` ${ x.clientHeight - navdiv.clientHeight }px`
 
             document.documentElement.addEventListener('keydown', e => {
-                afmainedit.textContent += e.key;
+                afmainedit.innerHTML =  parseKeyboard(textCache, e.key) ;
+
+                isNow = false
+                textCache = parseKeyboard(textCache, e.key);
+                afmainedit.innerHTML += '|'
+
+                if(interval) clearInterval(interval)
+                    cursorBlink()
             }, false);
+
+            afmainedit.addEventListener('click', (e) => {
+                clearInterval(interval)
+                cursorBlink()
+            }, false)
             
         }
         // first screen
@@ -144,6 +198,7 @@ let objWindows = {
             clearInterval(t)
             x.innerHTML = ''
             homeAFscreen()
+            cursorBlink()
         }
         mainAF()
     },
