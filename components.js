@@ -79,9 +79,26 @@ class DgradeMod {
 let objWindows = {
     AFtermux: (x) => {
         x.classList.add('black-bg')
+        const homeAFscreen = () => {
+            let navels = [
+                'File',
+                'Edit',
+                'Fish',
+                'Run'
+            ]
+            
+            const navdiv = el('div', x, ['class', 'defflexnav']);
+            const afmainedit = el('div', x, ['class', 'codeditor'])
 
+            navels.forEach(z => el('h5', navdiv).textContent = z )
 
+            afmainedit.style.height = ` ${ x.clientHeight - navdiv.clientHeight }px`
 
+            document.documentElement.addEventListener('keydown', e => {
+                afmainedit.textContent += e.key;
+            }, false);
+            
+        }
         // first screen
         const addTextI = async (itemText) => {
             await randomDelay()
@@ -126,6 +143,7 @@ let objWindows = {
             await randomDelay(4500)
             clearInterval(t)
             x.innerHTML = ''
+            homeAFscreen()
         }
         mainAF()
     },

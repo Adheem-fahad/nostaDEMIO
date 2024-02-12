@@ -116,3 +116,17 @@ body {
 .white-bg {
     background-color: white;
 }
+.defflexnav {
+    display: flex;
+    gap: 10px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.defflexnav h5:hover {
+    background-color: white;
+    color: black;
+}
+
+.codeditor {
+    width: 100%;
+    font-size: 0.8rem;
+}
