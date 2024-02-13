@@ -79,7 +79,9 @@ class DgradeMod {
 let objWindows = {
     AFtermux: (x) => {
         x.classList.add('black-bg')
-        let isNow = true, interval, afmainedit, textCache;
+
+        
+        let editor, isNow = true, interval, afmainedit, textCache;
 
         const parseKeyboard = (textCache, keyPressed) => {
             switch(keyPressed) {
@@ -129,7 +131,9 @@ let objWindows = {
             ]
             
             const navdiv = el('div', x, ['class', 'defflexnav']);
-            afmainedit = el('div', x, ['class', 'codeditor'])
+            editor = el('div', x, ['class', 'editor'])
+            let lengthOfIndex = el('div', editor, ['class', 'indexEditor'])
+            afmainedit = el('div', editor, ['class', 'codeditor'])
 
             textCache = '';
 
@@ -141,7 +145,7 @@ let objWindows = {
                 newRunTime.active.textContent = 'Running your af file in a sec'
             }
 
-            afmainedit.style.height = ` ${ x.clientHeight - navdiv.clientHeight }px`
+            afmainedit.style.width = ` ${ editor.clientWidth - lengthOfIndex.clientWidth }px`
 
             document.documentElement.addEventListener('keydown', e => {
                 afmainedit.innerHTML =  parseKeyboard(textCache, e.key) ;
@@ -158,6 +162,11 @@ let objWindows = {
                 clearInterval(interval)
                 cursorBlink()
             }, false)
+
+
+            for(let p = 1; p < 70; p++) {
+                el('h4', lengthOfIndex).textContent = p
+            }
             
         }
         // first screen

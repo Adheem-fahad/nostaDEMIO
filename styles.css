@@ -116,6 +116,23 @@ body {
 .white-bg {
     background-color: white;
 }
+
+.editor {
+    width: 100%;
+    /* background-color: red; */
+    display: flex;
+}
+.indexEditor {
+    width: 24px;
+    height: 100%;
+    /* background-color: rgb(0, 0, 128); */
+    font-size: 0.9rem;
+    text-align: right;
+    padding-right: 1px;
+    border-right: 2px solid rgba(0, 0, 255, 0.616);
+}
+
+
 .defflexnav {
     display: flex;
     gap: 10px;
@@ -127,7 +144,9 @@ body {
 }
 
 .codeditor {
-    width: 100%;
+    /* width: 100%; */
     font-size: 0.9rem;
     display: flex;
+    overflow-x: scroll;
+    /* background-color: green; */
 }
