@@ -112,6 +112,10 @@ class ErrWind extends Window {
     reduceSTYLE() {
         this.window.classList.add('errW')
         this.window.children[0].classList.add('warnerrW')
+        el('h1', this.active).textContent = this.error
+        this.options.forEach(option => {
+            el('button', this.active).textContent = option
+        })
     }
     changeOffset(x, y) {
         css(this.window, {

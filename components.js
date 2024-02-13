@@ -80,7 +80,6 @@ let objWindows = {
     AFtermux: (x) => {
         x.classList.add('black-bg')
 
-        
         let editor, isNow = true, interval, afmainedit, textCache;
 
         const parseKeyboard = (textCache, keyPressed) => {
@@ -103,13 +102,12 @@ let objWindows = {
                     break;
                 case 'Alt':
                     return textCache;
-                case '(': return textCache + keyPressed + ')';break;
+                // case '(': return textCache + keyPressed + ')';break;
                 case 'ArrowUp': return textCache; break; case 'ArrowDown': return textCache; break;case 'ArrowLeft': return textCache; break;case 'ArrowRight': return textCache; break;case 'Control': return textCache; break;case 'CapsLock': return textCache; break;
                 default: 
                     return textCache + keyPressed
             }
         }
-        
         let cursorBlink = () => {
             interval = setInterval(() => {
                 if(isNow) {
@@ -122,6 +120,30 @@ let objWindows = {
             }, 600)
         }
 
+        let interpretor = () => {
+            // sample code
+            let nowWherePrintIs = [textCache.indexOf('print('), textCache.indexOf(')')]
+            let textToPrint = textCache.slice(nowWherePrintIs[0]+6, nowWherePrintIs[1])
+            return textToPrint;
+        }
+
+        const runWindow = () => {
+            let newRunTime = new Window('RUNNINGprog')
+            newRunTime.active.classList.add('black-bg')
+            newRunTime.active.textContent = 'Af encoding, interpretation text manager. 2023S'
+            css(newRunTime.window, {
+                top: '130px',
+                left: '400px'
+            })
+            let textToPrint = interpretor()
+            setTimeout(() => {
+                el('br', newRunTime.active)
+                el('hr', newRunTime.active)
+                let outputel = el('h1', newRunTime.active)
+                outputel.textContent = textToPrint
+                outputel.style.fontFamily = 'Times New Roman'
+            }, 400)
+        }
         const homeAFscreen = () => {
             let navels = [
                 'File',
@@ -135,21 +157,31 @@ let objWindows = {
             let lengthOfIndex = el('div', editor, ['class', 'indexEditor'])
             afmainedit = el('div', editor, ['class', 'codeditor'])
 
+            let ifSaved = false;
             textCache = '';
 
             navels.forEach(z => el('h5', navdiv).textContent = z )
 
             navdiv.getElementsByTagName('h5')[3].onclick = () => {
-                let newRunTime = new Window('RUNNINGprog')
-                newRunTime.active.classList.add('black-bg')
-                newRunTime.active.textContent = 'Running your af file in a sec'
+                if(ifSaved) {
+                runWindow()
+                } else {
+                    let errorSave = new ErrWind('Running AF file', "You can't run an af file without saving.", ['Save', 'Run w/ save',]);
+                    errorSave.changeOffset(
+                        (document.documentElement.clientHeight - errorSave.window.clientHeight) / 2,
+                        (document.documentElement.clientWidth - errorSave.window.clientWidth) / 2
+                    )
+                }
+            }
+            navdiv.getElementsByTagName('h5')[0].onclick = () => {
+                ifSaved= true
             }
 
             afmainedit.style.width = ` ${ editor.clientWidth - lengthOfIndex.clientWidth }px`
 
             document.documentElement.addEventListener('keydown', e => {
                 afmainedit.innerHTML =  parseKeyboard(textCache, e.key) ;
-
+                ifSaved = false
                 isNow = false
                 textCache = parseKeyboard(textCache, e.key);
                 afmainedit.innerHTML += '|'
